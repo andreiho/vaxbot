@@ -1,0 +1,15 @@
+{
+  "name": "vaxbot",
+  "description": "A bot that signs you on up on the Danish vaccine waiting list",
+  "repository": "https://github.com/andreiho/vaxbot",
+  "license": "MIT",
+  "scripts": {
+    "start": "TZ=UTC node index.js"
+  },
+  "dependencies": {
+    "chrome-aws-lambda": "^9.1.0",
+    "dotenv": "^9.0.2",
+    "node-telegram-bot-api": "^0.53.0",
+    "puppeteer": "^9.1.1"
+  }
+}
