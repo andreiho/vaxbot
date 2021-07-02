@@ -17,15 +17,24 @@ const bot = new TelegramBot(token, {
 });
 
 async function sendMessage(message, photo) {
-  await bot.sendMessage(chatId, message);
+  const requests = [];
 
-  return bot.sendPhoto(chatId, photo, {
-    filename: "screenshot",
-    contentType: "image/png",
-  });
+  if (message) {
+    requests.push(bot.sendMessage(chatId, message));
+  }
+  if (photo) {
+    requests.push(
+      bot.sendPhoto(chatId, photo, {
+        filename: "screenshot",
+        contentType: "image/png",
+      })
+    );
+  }
+
+  return Promise.all(requests);
 }
 
-async function run() {
+async function run(centre) {
   const textInput = 'input[type="text"]';
 
   const browser = await chromium.puppeteer.launch({
@@ -54,6 +63,11 @@ async function run() {
 
     await page.waitForNavigation({ waitUntil: "domcontentloaded" });
   };
+
+  await next();
+
+  // First dose checkbox - No
+  await page.click('input[data-choice-label-value="2"]');
 
   await next();
 
@@ -88,25 +102,18 @@ async function run() {
   await next();
 
   // Vaccine center
-  for (const location of data.preferredLocations) {
-    const [option] = await page.$x(`//label[contains(text(), '${location}')]`);
-    if (option) {
-      await option.click();
-      break;
-    }
-  }
+  const [option] = await page.$x(`//label[contains(text(), '${centre}')]`);
+  await option.click();
 
   await next();
 
   // Accept terms
   await next();
 
-  const screenshot = await page.screenshot();
-  await sendMessage(`You're signed up! 💉`, screenshot);
-
   // Finish and close
   await next();
+
   await browser.close();
 }
 
-module.exports = { run };
+module.exports = { run, sendMessage };
