@@ -10,7 +10,7 @@ const centres = [
 
 module.exports = async (req, res) => {
   try {
-     {
+    const {
       query: { centreId },
     } = req;
 
