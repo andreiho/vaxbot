@@ -10,10 +10,11 @@ const centres = [
 
 module.exports = async (req, res) => {
   try {
-    const {
+     {
       query: { centreId },
     } = req;
 
+    const day = new Date().getDay();
     const centre = centres[Number(centreId) - 1];
 
     // Only Tuesday and Wednesday for this centre
@@ -21,7 +22,6 @@ module.exports = async (req, res) => {
       return res.json({ centre, skipped: true });
     }
 
-    const day = new Date().getDay();
     const start = Date.now();
 
     await run(centre);
@@ -32,7 +32,7 @@ module.exports = async (req, res) => {
 
     res.json({ centre, time });
   } catch (error) {
-    await sendMessage(`Something went wrong. Error: ${error}`);
-    res.json({ status: "OK", error });
+    await sendMessage(`Error at centre ${req.query.centreId}: ${error}`);
+    res.json({ error });
   }
 };
