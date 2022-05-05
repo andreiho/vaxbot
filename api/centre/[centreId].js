@@ -1,4 +1,4 @@
-const { run, sendMessage } = require("../../app");
+const { vaxbot, sendMessage } = require("../../app");
 
 const centres = [
   "Øksnehallen",
@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
 
     const start = Date.now();
 
-    await run(centre);
+    await vaxbot(centre);
     await sendMessage(`${centre} 💉`);
 
     const end = Date.now();

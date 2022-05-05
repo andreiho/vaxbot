@@ -4,7 +4,7 @@
   "repository": "https://github.com/andreiho/vaxbot",
   "license": "MIT",
   "scripts": {
-    "start": "TZ=UTC node index.js"
+    "start": "TZ=UTC node app.js"
   },
   "dependencies": {
     "chrome-aws-lambda": "^9.1.0",

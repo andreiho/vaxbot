@@ -1,0 +1,12 @@
+name: loan-check
+on:
+  schedule:
+    - cron: "1 7,10,13 * * *"
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run
+        run: |
+          curl --request GET \
+          --url 'https://vaxbot-andreiho.vercel.app/api/loan'

@@ -10,22 +10,18 @@ jobs:
         run: |
           curl --request GET \
           --url 'https://vaxbot-andreiho.vercel.app/api/centre/1'
-
       - name: Centre 2
         run: |
           curl --request GET \
           --url 'https://vaxbot-andreiho.vercel.app/api/centre/2'
-
       - name: Centre 3
         run: |
           curl --request GET \
           --url 'https://vaxbot-andreiho.vercel.app/api/centre/3'
-
       - name: Centre 4
         run: |
           curl --request GET \
           --url 'https://vaxbot-andreiho.vercel.app/api/centre/4'
-
       - name: Centre 5
         run: |
           curl --request GET \
