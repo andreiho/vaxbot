@@ -76,7 +76,7 @@ async function loanbot() {
 
     return [...document.querySelectorAll("table tbody tr")]
       .map((row) => {
-        const [name, _actualPrice, offerPrice] = [...row.querySelectorAll("td")]
+        const [name, actualPrice] = [...row.querySelectorAll("td")]
           .filter((cell) => !!cell.innerText)
           .map((cell) => cell.innerText);
 
@@ -86,7 +86,7 @@ async function loanbot() {
             .replaceAll("*", "")
             .split("DK")[0]
             .split("/")[1]
-            .trim()} - ${offerPrice} ${
+            .trim()} - ${actualPrice} ${
             name.includes("afdragsfrihed") ? "*" : ""
           }`;
         }
