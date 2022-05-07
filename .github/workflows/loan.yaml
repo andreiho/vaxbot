@@ -1,7 +1,7 @@
 name: loan-check
 on:
   schedule:
-    - cron: "1 7,10,13 * * *"
+    - cron: "0 7,10,13 * * 1-5"
 jobs:
   cron:
     runs-on: ubuntu-latest
